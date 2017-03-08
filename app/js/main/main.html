@@ -1,0 +1,76 @@
+<div class="section list">
+	<div class="section__content">
+		<div class="list__inline">
+			<div class="list__margin"></div>
+
+			<h2>Список задач <span ng-show="list.title">({{list.title}})</span></h2>
+
+			<div class="list__margin"></div>
+
+			<div class="list__margin">
+				<form ng-submit="addTask()">
+
+					<div class="list__inline">
+						<input type="text" ng-model="input" class="list__input" placeholder="Ваша задача">
+					</div>&nbsp;
+					<div class="list__inline">
+				    	<input class="list__button" type="submit" value="Добавить">
+				    </div>
+				    
+				</form>
+			</div>
+			
+			<div ng-repeat="item in list.items" class="list__checkbox">
+			    <input type="checkbox" id="item_ + {{$index}}" name="item_ + {{$index}}" ng-model="item.done">
+			    <label for="item_ + {{$index}}">{{item.txt}}</label>
+			</div>
+
+			<div class="list__margin"></div>
+
+			<div class="list__margin">
+				<button ng-show="list.items.length > 0" ng-click="removeTask()" class="list__button">Удалить</button>
+			</div>
+
+			<div class="list__margin">------------------------------------</div>
+
+			<div class="list__margin">
+			<form ng-submit="saveList()">
+				<div class="list__margin">
+					<input type="text" ng-model="list.title" class="list__input" placeholder="Имя списка">&nbsp;<sup>*</sup>
+				</div>
+
+				<input class="list__button" type="submit" value="Сохранить список">
+			</div>
+		</div><div class="list__inline list__inline_spacer"></div><div class="list__inline">
+			<div class="list__margin"></div>
+
+			<h2>Мои списки</h2>
+
+			<div class="list__margin"></div>
+
+			<div class="list__margin"></div>
+				
+			<ul class="list__list">
+				<li ng-repeat="list in dbList">
+					
+					<div class="list__margin">
+						<h3>{{list.title}}</h3>
+					</div>
+
+					<div class="list__margin">
+						<button ng-click='getList(list);'
+								class="list__button">
+							Загрузить список
+						</button>
+						&nbsp;
+						<button ng-click="removeList(list._id)"
+								class="list__button">
+							Удалить
+						</button>
+					</div>
+					<p>---------------------</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
